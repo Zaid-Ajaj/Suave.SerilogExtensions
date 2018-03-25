@@ -17,6 +17,7 @@ module Extensions =
                 | Some requestId -> Log.ForContext("RequestId", requestId)   
 
 type SerilogAdapter() = 
+    /// Wraps a WebPart with logging enabled using the given given configuration
     static member Enable(app: WebPart, config: SerilogConfig) : WebPart = 
         
         fun ctx -> async { 
@@ -24,7 +25,7 @@ type SerilogAdapter() =
             let stopwatch = Stopwatch.StartNew()
 
             let requestLogger = Log.ForContext(RequestLogEnricher(ctx, config, requestId))
-            requestLogger.Information("{Method} Request at {FullPath}")
+            requestLogger.Information(config.RequestMessageTemplate)
             
             try
               let contextWithRequestId = 
@@ -35,7 +36,7 @@ type SerilogAdapter() =
               match result with 
               | Some resultContext ->
                   let responseLogger = Log.ForContext(ResponseLogEnricher(resultContext, config, stopwatch, requestId))
-                  responseLogger.Information("{Method} Response at {FullPath} took {Duration} ms")
+                  responseLogger.Information(config.ResponseMessageTemplate)
                   return Some resultContext
               | None -> 
                   let passThrough = Log.ForContext(PassThroughLogEnricher(ctx))
@@ -44,9 +45,10 @@ type SerilogAdapter() =
             with 
             | ex -> 
                 let errorLogger = Log.ForContext(ErrorLogEnricher(ctx, stopwatch, requestId))
-                errorLogger.Error(ex, "Error at {FullPath} took {Duration} ms")
+                errorLogger.Error(ex, config.ErrorMessageTemplate)
                 let! errorHandlerResult = ((config.ErrorHandler ex ctx) ctx) 
                 return errorHandlerResult
         }
 
+    /// Wraps a WebPart with logging enables using the default configuration
     static member Enable(app: WebPart) = SerilogAdapter.Enable(app, SerilogConfig.defaults)

@@ -13,15 +13,22 @@ type ResponseLogData = ResponseLogData
 type SerilogConfig = 
     { IgnoredRequestFields : FieldChoser<RequestLogData>
       IgnoredResponseFields : FieldChoser<ResponseLogData>
+      RequestMessageTemplate : string
+      ResponseMessageTemplate : string
+      ErrorMessageTemplate : string
       ErrorHandler : System.Exception -> HttpContext -> WebPart }
 
     /// The default config with no ignored log event fields and a generic "Internal Server Error" 500 error handler.
-    static member defaults = { IgnoredRequestFields = Choser [ ] 
-                               IgnoredResponseFields = Choser [ ]
-                               ErrorHandler = 
-                                fun ex httpContext -> 
-                                   OK "Internal Server Error"
-                                   >=> Writers.setStatus HttpCode.HTTP_500  }
+    static member defaults = 
+        { IgnoredRequestFields = Choser [ ] 
+          IgnoredResponseFields = Choser [ ]
+          RequestMessageTemplate = "{Method} Request at {FullPath}"
+          ResponseMessageTemplate = "{Method} Response (StatusCode {StatusCode}) at {FullPath} took {Duration} ms"
+          ErrorMessageTemplate = "Error at {FullPath} took {Duration} ms"
+          ErrorHandler = 
+           fun ex httpContext -> 
+              OK "Internal Server Error"
+              >=> Writers.setStatus HttpCode.HTTP_500  }
 
 module Ignore = 
     let fromRequest : FieldChoser<RequestLogData> = Choser [ ]

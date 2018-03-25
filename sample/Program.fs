@@ -19,13 +19,16 @@ let app =
                      OK "Internal") 
            GET >=> path "/fail" >=> context (fun ctx -> failwith "Fail miserably") ]
 
+let simpleApp = 
+  choose [ GET >=> path "/" >=> OK "Home"
+           GET >=> path "/other" >=> OK "Other route" ] 
 let serilogConfig = 
   { SerilogConfig.defaults 
       with IgnoredRequestFields = 
              Ignore.fromRequest
              |> Field.host
              |> Field.requestBody }
-let appWithLogger = SerilogAdapter.Enable(app)
+let appWithLogger = SerilogAdapter.Enable(simpleApp)
 
 Log.Logger <- 
   LoggerConfiguration()
