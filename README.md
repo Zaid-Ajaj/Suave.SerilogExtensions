@@ -4,7 +4,7 @@
 
 ## Builds
 
-![Build History](https://buildstats.info/travisci/chart/Zaid-Ajaj/Suave.SerilogExtensions)](https://travis-ci.org/Zaid-Ajaj/Suave.SerilogExtensions/builds)
+![Build History](https://buildstats.info/travisci/chart/Zaid-Ajaj/Suave.SerilogExtensions)
 
 
 ### Building
