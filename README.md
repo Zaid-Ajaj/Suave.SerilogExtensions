@@ -1,4 +1,4 @@
-# Suave.SerilogExtensions ![[NuGet Badge](https://buildstats.info/nuget/Suave.SerilogExtensions)](https://www.nuget.org/packages/Suave.SerilogExtensions/) ![[Travis Badge](https://travis-ci.org/Zaid-Ajaj/Suave.SerilogExtensions.svg?branch=master)](https://travis-ci.org/Zaid-Ajaj/Suave.SerilogExtensions)
+# Suave.SerilogExtensions [![Build Status](https://travis-ci.org/Zaid-Ajaj/Suave.SerilogExtensions.svg?branch=master)](https://travis-ci.org/Zaid-Ajaj/Suave.SerilogExtensions) [![Nuget](https://img.shields.io/nuget/v/Suave.SerilogExtensions.svg?colorB=green)](https://www.nuget.org/packages/Suave.SerilogExtensions)
 
 [Suave](https://github.com/SuaveIO/suave) plugin to use [Serilog](https://github.com/serilog/serilog) as the logger for your application
 
