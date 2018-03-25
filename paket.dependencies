@@ -1,0 +1,21 @@
+source https://www.nuget.org/api/v2
+storage: none
+clitool dotnet-mono 0.5.2-alpha001
+clitool Microsoft.DotNet.Watcher.Tools 1.0.0
+clitool dotnet-sourcelink 2.8.0
+nuget Argu 3.7
+nuget FSharp.Core 4.3.3
+nuget Expecto 6.0.0
+nuget Serilog
+nuget Serilog.Sinks.Console
+nuget Serilog.Sinks.TestCorrelator
+nuget SourceLink.Create.CommandLine 2.8.0 copy_local: true
+nuget Suave
+nuget Suave.Testing
+
+
+group Build
+  framework: >= net45
+  source https://www.nuget.org/api/v2
+  nuget FAKE
+  github fsharp/FAKE modules/Octokit/Octokit.fsx

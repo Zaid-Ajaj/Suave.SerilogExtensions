@@ -1,0 +1,7 @@
+Expecto
+FSharp.Core
+Microsoft.DotNet.Watcher.Tools
+dotnet-mono
+Suave.Testing
+Serilog.Sinks.TestCorrelator
+Serilog.Sinks.Console
