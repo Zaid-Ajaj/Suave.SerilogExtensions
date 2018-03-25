@@ -1,6 +1,6 @@
 # Suave.SerilogExtensions
 
-[Suave]() plugin to use [Serilog]() as the logger for your application
+[Suave](https://github.com/SuaveIO/suave) plugin to use [Serilog](https://github.com/serilog/serilog) as the logger for your application
 
 ---
 
@@ -8,15 +8,15 @@
 
 MacOS/Linux | Windows
 --- | ---
-[![Travis Badge](https://travis-ci.org/zaid-ajaj/suave_serilog.svg?branch=master)](https://travis-ci.org/zaid-ajaj/suave_serilog) | [![Build status](https://ci.appveyor.com/api/projects/status/github/zaid-ajaj/suave_serilog?svg=true)](https://ci.appveyor.com/project/zaid-ajaj/suave_serilog)
-[![Build History](https://buildstats.info/travisci/chart/zaid-ajaj/suave_serilog)](https://travis-ci.org/zaid-ajaj/suave_serilog/builds) | [![Build History](https://buildstats.info/appveyor/chart/zaid-ajaj/suave_serilog)](https://ci.appveyor.com/project/zaid-ajaj/suave_serilog)  
+[![Travis Badge](https://travis-ci.org/Zaid-Ajaj/Suave.SerilogExtensions.svg?branch=master)](https://travis-ci.org/Zaid-Ajaj/Suave.SerilogExtensions) | [![Build status](https://ci.appveyor.com/api/projects/status/github/Zaid-Ajaj/Suave.SerilogExtensions?svg=true)](https://ci.appveyor.com/project/Zaid-Ajaj/Suave.SerilogExtensions)
+[![Build History](https://buildstats.info/travisci/chart/Zaid-Ajaj/Suave.SerilogExtensions)](https://travis-ci.org/Zaid-Ajaj/Suave.SerilogExtensions/builds) | [![Build History](https://buildstats.info/appveyor/chart/Zaid-Ajaj/Suave.SerilogExtensions)](https://ci.appveyor.com/project/Zaid-Ajaj/Suave.SerilogExtensions)  
 
 
 ## Nuget 
 
 Stable | Prerelease
 --- | ---
-[![NuGet Badge](https://buildstats.info/nuget/suave_serilog)](https://www.nuget.org/packages/suave_serilog/) | [![NuGet Badge](https://buildstats.info/nuget/suave_serilog?includePreReleases=true)](https://www.nuget.org/packages/suave_serilog/)
+[![NuGet Badge](https://buildstats.info/nuget/Suave.SerilogExtensions)](https://www.nuget.org/packages/Suave.SerilogExtensions/) | [![NuGet Badge](https://buildstats.info/nuget/Suave.SerilogExtensions?includePreReleases=true)](https://www.nuget.org/packages/Suave.SerilogExtensions/)
 
 ---
 
@@ -48,16 +48,6 @@ The `WatchTests` target will use [dotnet-watch](https://github.com/aspnet/Docs/b
 ./build.sh WatchTests
 ```
 
-### Releasing
-* [Start a git repo with a remote](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/)
-
-```
-git add .
-git commit -m "Scaffold"
-git remote add origin origin https://github.com/user/MyCoolNewLib.git
-git push -u origin master
-```
-
 * [Add your nuget API key to paket](https://fsprojects.github.io/Paket/paket-config.html#Adding-a-NuGet-API-key)
 
 ```
@@ -71,17 +61,10 @@ paket config add-token "https://www.nuget.org" 4003d786-cc37-4004-bfdf-c4f3e8ef9
 
 * Then update the `RELEASE_NOTES.md` with a new version, date, and release notes [ReleaseNotesHelper](https://fsharp.github.io/FAKE/apidocs/fake-releasenoteshelper.html)
 
-```
-#### 0.2.0 - 2017-04-20
-* FEATURE: Does cool stuff!
-* BUGFIX: Fixes that silly oversight
-```
-
 * You can then use the `Release` target.  This will:
     * make a commit bumping the version:  `Bump version to 0.2.0` and add the release notes to the commit
     * publish the package to nuget
     * push a git tag
-
 ```
 ./build.sh Release
 ```
