@@ -29,6 +29,7 @@ let webAppWithLogging = SerilogAdapter.Enable(webApp)
 // Configure serilog 
 Log.Logger <- 
   LoggerConfiguration()
+    .Destructure.FSharpTypes()
     .WriteTo.Console() // from Serilog.Sinks.Console
     .CreateLogger() 
 
@@ -48,6 +49,7 @@ open Serilog.Formatting.Json
 *)
 Log.Logger <- 
   LoggerConfiguration()
+    .Destructure.FSharpTypes()
     .WriteTo.Console() // from Serilog.Sinks.Console
     .WriteTo.Console(JsonFormatter())
     .CreateLogger() 
