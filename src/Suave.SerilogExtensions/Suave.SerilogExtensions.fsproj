@@ -23,6 +23,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="Destructure.fs" />
     <Compile Include="SerilogConfig.fs" />
     <Compile Include="Enrichers.fs" />
     <Compile Include="RequestLogEnricher.fs" />

@@ -2,3 +2,4 @@ FSharp.Core
 SourceLink.Create.CommandLine
 Suave
 Serilog
+Fable.JsonConverter
