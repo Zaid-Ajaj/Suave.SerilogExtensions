@@ -293,7 +293,6 @@ Target "Release" DoNothing
   ==> "DotnetBuild"
   ==> "DotnetTest"
   ==> "DotnetPack"
-  ==> "SourcelinkTest"
   ==> "Publish"
   ==> "GitRelease"
   ==> "GitHubRelease"

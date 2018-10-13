@@ -1,3 +1,6 @@
+#### 0.4.0 - 2018-10-13
+ - Update Suave dependency to 2.5.0
+
 #### 0.3.0 - 2017-03-25
  - Added native destructuring for fsharp types
 
