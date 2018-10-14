@@ -4,20 +4,20 @@ open System.Reflection
 
 [<assembly: AssemblyTitleAttribute("Suave.SerilogExtensions")>]
 [<assembly: AssemblyProductAttribute("Suave.SerilogExtensions")>]
-[<assembly: AssemblyVersionAttribute("0.4.0")>]
-[<assembly: AssemblyMetadataAttribute("ReleaseDate","2018-10-13T00:00:00.0000000")>]
-[<assembly: AssemblyFileVersionAttribute("0.4.0")>]
-[<assembly: AssemblyInformationalVersionAttribute("0.4.0")>]
+[<assembly: AssemblyVersionAttribute("0.5.0")>]
+[<assembly: AssemblyMetadataAttribute("ReleaseDate","2018-10-15T00:00:00.0000000")>]
+[<assembly: AssemblyFileVersionAttribute("0.5.0")>]
+[<assembly: AssemblyInformationalVersionAttribute("0.5.0")>]
 [<assembly: AssemblyMetadataAttribute("ReleaseChannel","release")>]
-[<assembly: AssemblyMetadataAttribute("GitHash","74263895e22e16aa5428f8c9620b4de03788c120")>]
+[<assembly: AssemblyMetadataAttribute("GitHash","2fa1403dc9c181128357ffaa4f0d2c4b2e2fa9e9")>]
 do ()
 
 module internal AssemblyVersionInformation =
     let [<Literal>] AssemblyTitle = "Suave.SerilogExtensions"
     let [<Literal>] AssemblyProduct = "Suave.SerilogExtensions"
-    let [<Literal>] AssemblyVersion = "0.4.0"
-    let [<Literal>] AssemblyMetadata_ReleaseDate = "2018-10-13T00:00:00.0000000"
-    let [<Literal>] AssemblyFileVersion = "0.4.0"
-    let [<Literal>] AssemblyInformationalVersion = "0.4.0"
+    let [<Literal>] AssemblyVersion = "0.5.0"
+    let [<Literal>] AssemblyMetadata_ReleaseDate = "2018-10-15T00:00:00.0000000"
+    let [<Literal>] AssemblyFileVersion = "0.5.0"
+    let [<Literal>] AssemblyInformationalVersion = "0.5.0"
     let [<Literal>] AssemblyMetadata_ReleaseChannel = "release"
-    let [<Literal>] AssemblyMetadata_GitHash = "74263895e22e16aa5428f8c9620b4de03788c120"
+    let [<Literal>] AssemblyMetadata_GitHash = "2fa1403dc9c181128357ffaa4f0d2c4b2e2fa9e9"

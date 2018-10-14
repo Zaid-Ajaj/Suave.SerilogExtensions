@@ -1,3 +1,6 @@
+#### 0.5.0 - 2018-10-15
+ - net461 target
+
 #### 0.4.0 - 2018-10-13
  - Update Suave dependency to 2.5.0
 
