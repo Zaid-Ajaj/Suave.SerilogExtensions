@@ -8,20 +8,19 @@ open Serilog.Events
 type PassThroughLogEnricher(context: HttpContext) = 
     interface ILogEventEnricher with 
         member this.Enrich(logEvent: LogEvent, _: ILogEventPropertyFactory) = 
-            let anyOf xs = fun x -> List.exists ((=) x) xs 
+            let (stopwatchExists, stopwatchValue) = context.userState.TryGetValue "Stopwatch"
+            if stopwatchExists then
+                stopwatchValue
+                |> unbox<Stopwatch> 
+                |> fun stopwatch -> 
+                    stopwatch.Stop()
+                    stopwatch.ElapsedMilliseconds
+                    |> Enrichers.eventProperty "Duration"
+                    |> logEvent.AddOrUpdateProperty
 
-            context.userState
-            |> Map.find "Stopwatch"
-            |> unbox<Stopwatch> 
-            |> fun stopwatch -> 
-                stopwatch.Stop()
-                stopwatch.ElapsedMilliseconds
-                |> int
-                |> Enrichers.eventProperty "Duration"
+            let (hasRequestId, requestId) = context.userState.TryGetValue "RequestId"
+            if hasRequestId then
+                requestId
+                |> unbox<string> 
+                |> Enrichers.eventProperty "RequestId"
                 |> logEvent.AddOrUpdateProperty
-
-            context.userState
-            |> Map.find "RequestId"
-            |> unbox<string> 
-            |> Enrichers.eventProperty "RequestId"
-            |> logEvent.AddOrUpdateProperty            

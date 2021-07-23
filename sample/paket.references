@@ -2,3 +2,4 @@ FSharp.Core
 Suave
 Serilog
 Serilog.Sinks.Console
+Fable.Remoting.Json

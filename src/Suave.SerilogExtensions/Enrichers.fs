@@ -8,6 +8,7 @@ module Enrichers =
       match value with
       | :? string as text -> ScalarValue(text) :> LogEventPropertyValue
       | :? int as number -> ScalarValue(number) :> LogEventPropertyValue
+      | :? int64 as number -> ScalarValue(number) :> LogEventPropertyValue
       | :? Map<string, string> as dict ->
           Map.toList dict
           |> List.map (fun (key, value) -> 

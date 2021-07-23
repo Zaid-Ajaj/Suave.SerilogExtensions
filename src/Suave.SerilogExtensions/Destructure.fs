@@ -7,14 +7,13 @@ open Newtonsoft.Json
 open Newtonsoft.Json.Linq
 
 module Json = 
-    let private fableConverter = Fable.JsonConverter()
-    let serialize (x: 'a) : string = 
-        JsonConvert.SerializeObject(x, fableConverter)
+    let private fableConverter = Fable.Remoting.Json.FableJsonConverter()
+    let serialize (x: 'a) : string = JsonConvert.SerializeObject(x, fableConverter)
 
     let rec convertToLogEventProperty (token : JToken) : LogEventPropertyValue = 
         match token.Type with
         | JTokenType.Null -> ScalarValue(null) :> LogEventPropertyValue
-        | JTokenType.Array ->   
+        | JTokenType.Array ->
             token 
             |> unbox<JArray> 
             |> Seq.map convertToLogEventProperty 

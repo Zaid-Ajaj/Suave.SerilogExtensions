@@ -2,6 +2,6 @@ Expecto
 FSharp.Core
 Microsoft.DotNet.Watcher.Tools
 dotnet-mono
-Suave.Testing
+Suave
 Serilog.Sinks.TestCorrelator
 Serilog.Sinks.Console

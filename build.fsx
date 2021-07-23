@@ -74,19 +74,15 @@ type TargetFramework =
 | Full of string
 | Core of string
 
-let (|StartsWith|_|) prefix (s: string) =
+let (|StartsWith|_|) (prefix: string) (s: string) =
     if s.StartsWith prefix then Some () else None
 
-let getTargetFramework tf =
-    match tf with
-    | StartsWith "net4" -> Full tf
-    | StartsWith "netcoreapp" -> Core tf
-    | _ -> failwithf "Unknown TargetFramework %s" tf
+let getTargetFramework tf = Core tf
 
 let getTargetFrameworksFromProjectFile (projFile : string)=
     let doc = Xml.XmlDocument()
     doc.Load(projFile)
-    doc.GetElementsByTagName("TargetFrameworks").[0].InnerText.Split(';')
+    doc.GetElementsByTagName("TargetFramework").[0].InnerText.Split(';')
     |> Seq.map getTargetFramework
     |> Seq.toList
 
@@ -170,7 +166,7 @@ Target "AssemblyInfo" (fun _ ->
           Attribute.Metadata("GitHash", Information.getCurrentSHA1(null))
         ]
 
-    let getProjectDetails projectPath =
+    let getProjectDetails (projectPath: string) =
         let projectName = System.IO.Path.GetFileNameWithoutExtension(projectPath)
         ( projectPath,
           projectName,
@@ -294,8 +290,6 @@ Target "Release" DoNothing
   ==> "DotnetTest"
   ==> "DotnetPack"
   ==> "Publish"
-  ==> "GitRelease"
-  ==> "GitHubRelease"
   ==> "Release"
 
 "DotnetRestore"

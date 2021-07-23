@@ -1,3 +1,6 @@
+#### 0.6.0 - 2021-07-23
+ - Update dependencies Suave with Serilog and Fable.Remoting.Json
+
 #### 0.5.0 - 2018-10-15
  - net461 target
 

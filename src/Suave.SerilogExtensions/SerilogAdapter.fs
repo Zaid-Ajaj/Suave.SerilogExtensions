@@ -9,15 +9,15 @@ open Serilog
 module Extensions = 
     type HttpContext with 
         /// Returns a logger with the RequestId attached to it, if present.
-        member ctx.Logger() : ILogger = 
-            ctx.userState
-            |> Map.tryFind "RequestId"
-            |> function 
-                | None -> Log.Logger
-                | Some requestId -> Log.ForContext("RequestId", requestId)   
+        member ctx.Logger() : ILogger =
+            let (hasRequestId, requestId) = ctx.userState.TryGetValue "RequestId"
+            if hasRequestId then
+                Log.ForContext("RequestId", requestId)
+            else
+                Log.Logger
 
 type SerilogAdapter() = 
-    /// Wraps a WebPart with logging enabled using the given given configuration
+    /// Wraps a WebPart with logging enabled using the given configuration
     static member Enable(app: WebPart, config: SerilogConfig) : WebPart = 
         
         fun ctx -> async { 
@@ -28,20 +28,17 @@ type SerilogAdapter() =
             requestLogger.Information(config.RequestMessageTemplate)
             
             try
-              let contextWithRequestId = 
-                { ctx with 
-                    userState = Map.add "RequestId" (box requestId) ctx.userState }
-
-              let! result = app contextWithRequestId
-              match result with 
-              | Some resultContext ->
-                  let responseLogger = Log.ForContext(ResponseLogEnricher(resultContext, config, stopwatch, requestId))
-                  responseLogger.Information(config.ResponseMessageTemplate)
-                  return Some resultContext
-              | None -> 
-                  let passThrough = Log.ForContext(PassThroughLogEnricher(ctx))
-                  passThrough.Information("Passing through logger WebPart")
-                  return None
+                ctx.userState.Add("RequestId", requestId)
+                let! result = app ctx
+                match result with 
+                | Some resultContext ->
+                    let responseLogger = Log.ForContext(ResponseLogEnricher(resultContext, config, stopwatch, requestId))
+                    responseLogger.Information(config.ResponseMessageTemplate)
+                    return Some resultContext
+                | None -> 
+                    let passThrough = Log.ForContext(PassThroughLogEnricher(ctx))
+                    passThrough.Information("Passing through logger WebPart")
+                    return None
             with 
             | ex -> 
                 let errorLogger = Log.ForContext(ErrorLogEnricher(ctx, stopwatch, requestId))

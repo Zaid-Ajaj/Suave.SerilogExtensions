@@ -8,13 +8,9 @@ open Serilog.Events
 type ErrorLogEnricher(context: HttpContext, stopwatch: Stopwatch, requestId: string) = 
     interface ILogEventEnricher with 
         member this.Enrich(logEvent: LogEvent, _: ILogEventPropertyFactory) = 
-            let anyOf xs = fun x -> List.exists ((=) x) xs 
-            
             stopwatch.Stop()
-            
 
             stopwatch.ElapsedMilliseconds
-            |> int
             |> Enrichers.eventProperty "Duration"
             |> logEvent.AddOrUpdateProperty
 
@@ -39,4 +35,3 @@ type ErrorLogEnricher(context: HttpContext, stopwatch: Stopwatch, requestId: str
 
             Enrichers.eventProperty "Type" "ServerError"
             |> logEvent.AddOrUpdateProperty
-            

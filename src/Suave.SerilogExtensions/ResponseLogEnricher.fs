@@ -14,7 +14,6 @@ type ResponseLogEnricher(context: HttpContext, config: SerilogConfig, stopwatch:
             
             stopwatch.Stop()
             stopwatch.ElapsedMilliseconds
-            |> int
             |> Enrichers.eventProperty "Duration"
             |> logEvent.AddOrUpdateProperty
 
